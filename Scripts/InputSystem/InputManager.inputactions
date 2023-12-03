@@ -1,0 +1,204 @@
+{
+    "name": "InputManager",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "22a41594-fe65-40d3-885c-aaa7105d0993",
+            "actions": [
+                {
+                    "name": "Walk",
+                    "type": "Value",
+                    "id": "8040a241-c138-43f7-9131-2428c9d6f9de",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "9de79158-981c-444c-bab8-5ae43eb51efd",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Run",
+                    "type": "Button",
+                    "id": "31e1bf35-fe3b-488f-a5f5-59568037aa7c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "a87a3368-0d32-4808-b7c9-e7e7264191b1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Crouch",
+                    "type": "Button",
+                    "id": "c6bb7f29-36ab-4265-a20b-108a771894e1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+<<<<<<< HEAD
+                },
+                {
+                    "name": "ChangeViewMode",
+                    "type": "Button",
+                    "id": "4b0c433f-52d8-4188-90d5-b70c54314c5f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "WatchViewed",
+                    "type": "Button",
+                    "id": "3a040c71-2504-4b5e-b403-059158475c1d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+=======
+>>>>>>> parent of 3211f14 (Update)
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ad42b61a-1ebc-4d08-8d2d-aa03d7e236ef",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c875546c-63f7-47c1-969c-d10647293e88",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e86c9f61-9607-4367-b3c6-4d2567caa760",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "WASD",
+                    "id": "6aa631c3-d46b-4ac3-8122-47e333f38296",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walk",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "3740bb0b-580c-4ead-a865-fb1719f75042",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walk",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "1bcd2384-2ca3-4738-ade4-efefc1b5e4ab",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walk",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "d1d388b8-cf54-440e-985c-d842a3ca03da",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walk",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "ac9d489b-4a5c-4e94-a266-91fcfe9b72df",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walk",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "0f366eca-3ba4-4ba4-9337-0ced0297d97c",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+<<<<<<< HEAD
+                },
+                {
+                    "name": "",
+                    "id": "165dc7a4-5049-455b-a1ee-9bb978f69340",
+                    "path": "<Keyboard>/v",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeViewMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a48f5114-44a8-4522-97b6-cdb7409d1f4b",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WatchViewed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+=======
+>>>>>>> parent of 3211f14 (Update)
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
