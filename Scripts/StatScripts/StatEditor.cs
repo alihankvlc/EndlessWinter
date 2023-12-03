@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 using UnityEngine;
 
 namespace Player.Stat
@@ -6,7 +7,6 @@ namespace Player.Stat
     [CustomEditor(typeof(Stat), true)]
     public class StatEditor : Editor
     {
-#if UNITY_EDITOR
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
@@ -58,6 +58,6 @@ namespace Player.Stat
 
             return StatType.None;
         }
-#endif
     }
 }
+#endif

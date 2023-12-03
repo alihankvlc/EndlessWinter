@@ -32,10 +32,6 @@ namespace Player.Stat
         private List<IStatObserver> m_Observers = new List<IStatObserver>();
         public void AttachObserver(IStatObserver observer) => m_Observers.Add(observer);
         protected void NotifyObservers() => m_Observers.ForEach(observer => observer.OnNotify(Type,Modify));
-        public void CalculateNotifyRate()
-        {
-
-        }
     }
 }
 

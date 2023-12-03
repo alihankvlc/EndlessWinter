@@ -14,7 +14,6 @@ namespace Player.Stat
                 base.Modify = value;
                 IsAlive = CurrentValue > 0;
             }
-
            
         }
 

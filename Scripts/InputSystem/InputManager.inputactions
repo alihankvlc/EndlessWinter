@@ -49,7 +49,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-<<<<<<< HEAD
                 },
                 {
                     "name": "ChangeViewMode",
@@ -68,8 +67,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-=======
->>>>>>> parent of 3211f14 (Update)
                 }
             ],
             "bindings": [
@@ -171,7 +168,6 @@
                     "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
-<<<<<<< HEAD
                 },
                 {
                     "name": "",
@@ -194,8 +190,6 @@
                     "action": "WatchViewed",
                     "isComposite": false,
                     "isPartOfComposite": false
-=======
->>>>>>> parent of 3211f14 (Update)
                 }
             ]
         }
