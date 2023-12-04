@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Player.Stat
+namespace EndlessWinter.Stat
 {
     [CustomEditor(typeof(Stat), true)]
     public class StatEditor : Editor
@@ -28,10 +28,6 @@ namespace Player.Stat
                               $"<color=yellow>({stat.Type})</color>" +
                               $" Has Been Reset.");
                 }
-            }
-            else
-            {
-                Debug.LogWarning("<color=green>Changes can only be made in editor mode.</color>");
             }
         }
 

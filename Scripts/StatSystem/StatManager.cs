@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-namespace Player.Stat
+namespace EndlessWinter.Stat
 {
     public class StatManager : Singleton<StatManager>, IStatObserver
     {
+        #region Variables
         [SerializeField] private List<Stat> m_StatList = new List<Stat>();
-        private float m_RefPreviousValue;
-
+        private float m_RefPreviousValue; 
+        #endregion
         private void Start() => m_StatList.ForEach(r => r.AttachObserver(this));
-        #region OverloadingFuncs
+        #region Funcs
         public T GetStat<T>() where T : Stat
         {
             foreach (Stat stat in m_StatList)
@@ -17,7 +18,6 @@ namespace Player.Stat
 
             return null;
         }
-        #endregion
         public void OnNotify(StatType type, float param)
         {
             var maxValue = m_StatList.Find(r => r.Type == type)?.MaxValue ?? 0.0f;
@@ -29,6 +29,8 @@ namespace Player.Stat
                 uiStatUpdater.DisplayCount = 3;
             }
         }
+        #endregion
+
     }
 }
 

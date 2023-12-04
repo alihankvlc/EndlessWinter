@@ -21,7 +21,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             return m_Instance;
         }
     }
-
     protected virtual void Awake()
     {
         if (m_Instance != null && m_Instance != this)

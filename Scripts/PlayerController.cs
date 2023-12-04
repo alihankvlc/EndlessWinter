@@ -1,10 +1,8 @@
+using UnityEngine.Rendering.Universal;
 using UnityEngine.InputSystem;
 using UnityEngine;
-using Player.Stat;
-using UnityEngine.Rendering.Universal;
-using System.Collections;
+using EndlessWinter.Stat;
 using System;
-using UnityEngine.Animations.Rigging;
 
 namespace Player
 {
@@ -14,6 +12,9 @@ namespace Player
     [RequireComponent(typeof(InputManager))]
     public class PlayerController : MonoBehaviour
     {
+        private CharacterController m_Controller;
+        private Animator m_Animator;
+        private InputManager m_Input;
         #region PlayerMovementVariables
         [Header("Player Movement Variables")]
         [Min(1f)]
@@ -30,11 +31,7 @@ namespace Player
         [Header("Player Stats Variables")]
         [Header("Stamina")]
         [SerializeField]
-        private float m_StaminaDecreaseAmount;
-        [SerializeField] private float m_StaminaIncreaseAmount;
-        [SerializeField] private float m_FatigueMultiply;
         private float m_StaminaValue;
-        private float m_FatigueValue;
         #endregion
         #region CameraVariables
         [Header("Camera Variables")]
@@ -69,9 +66,7 @@ namespace Player
         [SerializeField] private UniversalRendererData Renderer;
         private const float m_Threshold = 0.1f;
         #endregion
-        private CharacterController m_Controller;
-        private Animator m_Animator;
-        private InputManager m_Input;
+        #region Funcs
         private void Start()
         {
             #region InitializeComponent
@@ -94,7 +89,6 @@ namespace Player
 
             m_PlayerViewMode = m_Input.changeView ? ViewMode.ThirdPerson : ViewMode.FirstPerson;
         }
-        #region Funcs
         #region Movement
         private void Movement()
         {
@@ -136,7 +130,7 @@ namespace Player
             float staminaChangeAmount = 0f;
 
             /*Statlara StatManager instance üzerinden deðil direk stamina sýnýfýnýn örneðini üzerinden
-            eriþebilirim.*/
+            eriþebilirim.......*/
 
             if (m_Input.run && m_CanRunning && m_Input.move != Vector2.zero)
             {

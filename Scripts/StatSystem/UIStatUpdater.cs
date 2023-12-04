@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-namespace Player.Stat
+namespace EndlessWinter.Stat
 {
     [System.Serializable]
+    /*Artış veya azalış oranlarına göre çıkacak ok animasyonları ayarlanacak.*/
     public class UIStatUpdater
     {
+        #region Variables
         public Stat Stat;
         public Slider Slider;
         public Image[] StatArrow;
@@ -14,8 +16,9 @@ namespace Player.Stat
         private int m_ArrowRate;
 
         private bool m_ReverseArrayExecuted;
-        private Sequence m_Sequence;
-
+        private Sequence m_Sequence; 
+        #endregion
+        #region Property
         public int DisplayCount
         {
             get => m_ArrowRate;
@@ -32,6 +35,8 @@ namespace Player.Stat
                 }
             }
         }
+        #endregion
+        #region Funcs
         public void UpdateUI(float param)
         {
             Slider.maxValue = Stat.MaxValue;
@@ -146,5 +151,6 @@ namespace Player.Stat
             }
         }
 
-    }
+    } 
+    #endregion
 }

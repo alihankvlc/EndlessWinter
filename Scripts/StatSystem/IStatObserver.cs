@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Player.Stat
+namespace EndlessWinter.Stat
 {
     public interface IStatObserver
     {

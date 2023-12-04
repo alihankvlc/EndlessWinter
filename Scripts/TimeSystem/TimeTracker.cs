@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "TimeTracker", menuName = "EndlessWinter/CreateTimeTracker")]
 public class TimeTracker : ScriptableObject
 {
+    #region Variables
     [Range(1, 6)][SerializeField] private int m_InitialDay;
     [Range(0, 23)][SerializeField] private int m_InitialHours;
     [Range(0, 59)][SerializeField] private int m_InitialMinutes;
@@ -21,6 +21,8 @@ public class TimeTracker : ScriptableObject
     public event EventHandler<TimeChangedEventArgs> DayChangedEvent;
     public event EventHandler<TimeChangedEventArgs> HourChangedEvent;
     public event EventHandler<TimeChangedEventArgs> MinuteChangedEvent;
+    #endregion
+    #region Property
     public int Day
     {
         get => m_Days;
@@ -36,6 +38,8 @@ public class TimeTracker : ScriptableObject
         get => m_Minute;
         private set => SetAndInvokeIfChanged(ref m_Minute, value, OnMinuteChanged);
     }
+    #endregion
+    #region Funcs
     private void OnEnable()
     {
         string[] daysArray = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
@@ -43,7 +47,6 @@ public class TimeTracker : ScriptableObject
 
         UIManager.Instance.TimeTextMeshPro?.SetText(GetFormattedTime());
     }
-#if UNITY_EDITOR
     private void OnValidate()
     {
         if (!Application.isPlaying)
@@ -55,7 +58,6 @@ public class TimeTracker : ScriptableObject
             UIManager.Instance.TimeTextMeshPro?.SetText(GetFormattedTime());
         }
     }
-#endif
     public string GetFormattedTime() =>
     $"DAY:{Day} {Hour:D2}:{Minute:D2}\n{m_DaysList[(m_Days + 6) % m_DaysList.Count]}";
     public void UpdateTime()
@@ -96,5 +98,6 @@ public class TimeTracker : ScriptableObject
     }
     protected virtual void OnDayChanged() => DayChangedEvent?.Invoke(this, new TimeChangedEventArgs(Day));
     protected virtual void OnHourChanged() => HourChangedEvent?.Invoke(this, new TimeChangedEventArgs(Hour));
-    protected virtual void OnMinuteChanged() => MinuteChangedEvent?.Invoke(this, new TimeChangedEventArgs(Minute));
+    protected virtual void OnMinuteChanged() => MinuteChangedEvent?.Invoke(this, new TimeChangedEventArgs(Minute)); 
+    #endregion
 }

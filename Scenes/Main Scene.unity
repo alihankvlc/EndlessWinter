@@ -338,9 +338,7 @@ MonoBehaviour:
   m_RunSpeed: 5
   m_SpeedChangeOffset: 10
   m_MouseSensitivity: 7
-  m_StaminaDecreaseAmount: 15
-  m_StaminaIncreaseAmount: 15
-  m_FatigueMultiply: 0
+  m_StaminaValue: 0
   m_CameraRoot: {fileID: 715313971}
   m_ThirdPersonCamera: {fileID: 475214307}
   m_TPSCameraTransform: {fileID: 1196656086}
@@ -3057,9 +3055,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'DAY:1 23:58
+  m_text: 'DAY:1 15:40
 
-    Tue'
+    Mon'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3086,8 +3084,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82e8115672903164ea48a83171565c63, type: 3}
-  m_Name: Health
+  m_Script: {fileID: 11500000, guid: 3811df9af745fd941b9888615438d564, type: 3}
+  m_Name: Stamina
   m_EditorClassIdentifier: 
-  Type: 5
+  Type: 6
   CurrentValue: 100
   MaxValue: 100
   CustomColor: {r: 1, g: 1, b: 1, a: 1}
@@ -21,4 +21,5 @@ MonoBehaviour:
   FadeInDuration: 0.35
   FadeOutDuration: 0.35
   Delay: 0.15
-  <IsAlive>k__BackingField: 1
+  m_IncreaseAmount: 10
+  m_DecreaseAmount: 15

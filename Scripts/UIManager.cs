@@ -1,5 +1,5 @@
 ﻿using DG.Tweening;
-using Player.Stat;
+using EndlessWinter.Stat;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -7,10 +7,13 @@ using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
+    #region Variables
     [SerializeField] private List<UIStatUpdater> m_UIStatList = new List<UIStatUpdater>();
     [SerializeField] private TextMeshProUGUI m_TimeTextMesh;
     private Dictionary<StatType, UIStatUpdater> m_UIStatDataDic = new Dictionary<StatType, UIStatUpdater>();
 
+    #endregion
+    #region Property
     public TextMeshProUGUI TimeTextMeshPro
     {
         get => m_TimeTextMesh;
@@ -19,6 +22,8 @@ public class UIManager : Singleton<UIManager>
             m_TimeTextMesh = value;
         }
     }
+    #endregion
+    #region Funcs
     protected override void Awake()
     {
         DOTween.SetTweensCapacity(5000, 500);
@@ -34,5 +39,6 @@ public class UIManager : Singleton<UIManager>
             return stat;
         }
         return null;
-    }
+    } 
+    #endregion
 }
