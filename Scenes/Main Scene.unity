@@ -1548,6 +1548,12 @@ MonoBehaviour:
     - {fileID: 709052314}
     - {fileID: 1039724709}
     - {fileID: 377687968}
+  - Stat: {fileID: 11400000, guid: c93ba8b72f8cc9c41b6092476aa44585, type: 2}
+    Slider: {fileID: 762052683}
+    StatArrow:
+    - {fileID: 709052314}
+    - {fileID: 1039724709}
+    - {fileID: 377687968}
   m_TimeTextMesh: {fileID: 1054252551}
 --- !u!1 &547368959
 GameObject:
@@ -3469,6 +3475,7 @@ GameObject:
   - component: {fileID: 1218899022}
   - component: {fileID: 1218899023}
   - component: {fileID: 1218899024}
+  - component: {fileID: 1218899025}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3506,6 +3513,7 @@ MonoBehaviour:
   m_StatList:
   - {fileID: 11400000, guid: 17845662db2f69b40b9555d3fe115824, type: 2}
   - {fileID: 11400000, guid: c7998dc06ec44ee42a21af64dd1910a8, type: 2}
+  - {fileID: 11400000, guid: c93ba8b72f8cc9c41b6092476aa44585, type: 2}
 --- !u!114 &1218899024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3527,13 +3535,40 @@ MonoBehaviour:
       m_Calls: []
   m_ChangeMinuteEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 102f6842e68e80b46a34fd08d4d6e3a3, type: 2}
+        m_TargetAssemblyTypeName: EndlessWinter.Weather.Weather, Assembly-CSharp
+        m_MethodName: UpdateWeather
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnDayEvent:
     m_PersistentCalls:
       m_Calls: []
   m_OnNightEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1218899025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1218899021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fea84d23433a474a9ca01e5dc4729ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Weather: {fileID: 11400000, guid: 102f6842e68e80b46a34fd08d4d6e3a3, type: 2}
+  m_Temperature: 0
+  m_ActiveWeatherType: 0
 --- !u!1 &1232469808
 GameObject:
   m_ObjectHideFlags: 0
@@ -4612,7 +4647,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 193b3d1b4ec53704f82c332298769226, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

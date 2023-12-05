@@ -13,7 +13,7 @@ namespace EndlessWinter.Stat
         [SerializeField] internal int MaxValue = 100;
         [SerializeField] internal Color CustomColor = Color.white;
         [SerializeField] internal Color ThresholdColor = Color.red;
-        [SerializeField,Multiline] internal string Inform = "Null";
+        [SerializeField,] internal string Inform = "Null";
         [Header("Increase & Decrease Arrow Settings")]
         [SerializeField] internal float FadeInDuration = 0.35f;
         [SerializeField] internal float FadeOutDuration = 0.35f;

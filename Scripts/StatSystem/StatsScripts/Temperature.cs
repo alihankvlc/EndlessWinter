@@ -37,5 +37,6 @@ namespace EndlessWinter.Stat
             set => base.Modify = value;
         }
         #endregion
+        ////// Komple değişecek ....
     }
 }

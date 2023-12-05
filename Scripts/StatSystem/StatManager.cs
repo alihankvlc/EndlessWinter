@@ -26,7 +26,7 @@ namespace EndlessWinter.Stat
             {
                 uiStatUpdater?.UpdateUI(param);
                 m_RefPreviousValue = param;
-                uiStatUpdater.DisplayCount = 3;
+               // uiStatUpdater.DisplayCount = 3;
             }
         }
         #endregion

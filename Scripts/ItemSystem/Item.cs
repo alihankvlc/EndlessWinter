@@ -10,7 +10,7 @@ namespace EndlessWinter.Item
         #region Variables
         [Header("General Settings")]
         [SerializeField] internal ItemType ItemType;
-        [SerializeField] internal RarityTpye Rarity;
+        [SerializeField] internal RarityType Rarity;
         [SerializeField] internal Sprite Icon;
         [SerializeField] internal GameObject Prefab;
         [SerializeField] internal int Id;

@@ -1,5 +1,7 @@
 ﻿using DG.Tweening;
 using EndlessWinter.Stat;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -32,6 +34,9 @@ public class UIManager : Singleton<UIManager>
     {
         m_UIStatDataDic = m_UIStatList.ToDictionary(uiUpdater => uiUpdater.Stat.Type);
     }
+    private void Update()
+    {
+    }
     public UIStatUpdater UIStatUpdater(StatType type)
     {
         if (m_UIStatDataDic.TryGetValue(type, out UIStatUpdater stat))
@@ -39,6 +44,6 @@ public class UIManager : Singleton<UIManager>
             return stat;
         }
         return null;
-    } 
+    }
     #endregion
 }

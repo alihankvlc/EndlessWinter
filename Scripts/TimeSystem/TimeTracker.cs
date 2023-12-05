@@ -98,6 +98,6 @@ public class TimeTracker : ScriptableObject
     }
     protected virtual void OnDayChanged() => DayChangedEvent?.Invoke(this, new TimeChangedEventArgs(Day));
     protected virtual void OnHourChanged() => HourChangedEvent?.Invoke(this, new TimeChangedEventArgs(Hour));
-    protected virtual void OnMinuteChanged() => MinuteChangedEvent?.Invoke(this, new TimeChangedEventArgs(Minute)); 
+    protected virtual void OnMinuteChanged() => MinuteChangedEvent?.Invoke(this, new TimeChangedEventArgs(Minute));
     #endregion
 }

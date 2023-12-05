@@ -29,6 +29,10 @@ namespace EndlessWinter.Stat
                               $" Has Been Reset.");
                 }
             }
+            else
+            {
+                Debug.LogWarning("<color=green>Changes can only be made in editor mode.</color>");
+            }
         }
 
         private void SetDefaultVariables(Stat stat)

@@ -13,11 +13,17 @@ MonoBehaviour:
   m_Name: Temperature
   m_EditorClassIdentifier: 
   Type: 3
-  CurrentValue: 100
-  MaxValue: 100
+  CurrentValue: 68
+  MaxValue: 163
   CustomColor: {r: 1, g: 1, b: 1, a: 1}
   ThresholdColor: {r: 1, g: 0, b: 0, a: 1}
   Inform: Null
   FadeInDuration: 0.35
   FadeOutDuration: 0.35
   Delay: 0.15
+  m_InitialTemp: 0
+  m_minTemp: 0
+  m_MaxTemp: 0
+  m_ColdWeatherEffect: 0
+  m_ClothingEffect: 5
+  m_InBuildingTempBonus: 10

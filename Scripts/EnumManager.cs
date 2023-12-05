@@ -1,10 +1,20 @@
 ﻿using UnityEngine;
 
+
 #region Other
 public enum ViewMode
 {
     ThirdPerson,
     FirstPerson
+}
+public enum RarityType
+{
+    None,
+    Common = 75,
+    Uncommon = 25,
+    Rare = 15,
+    Epic = 10,
+    Legendary = 1
 }
 #endregion
 #region StatSystem
@@ -58,12 +68,15 @@ public enum ClothesType
     LegWear,
     FeetWear,
 }
-public enum RarityTpye
+#endregion
+#region Weather
+public enum WeatherType
 {
-    Common,
-    Uncommon,
-    Rare,
-    Epic,
-    Legendary
+    None,
+    Default,
+    Cloudy,
+    Rainy,
+    Snowy,
+    Storm
 }
 #endregion
