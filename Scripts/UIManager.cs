@@ -12,6 +12,7 @@ public class UIManager : Singleton<UIManager>
     #region Variables
     [SerializeField] private List<UIStatUpdater> m_UIStatList = new List<UIStatUpdater>();
     [SerializeField] private TextMeshProUGUI m_TimeTextMesh;
+    [SerializeField] private TextMeshProUGUI m_TempTextMesh;
     private Dictionary<StatType, UIStatUpdater> m_UIStatDataDic = new Dictionary<StatType, UIStatUpdater>();
 
     #endregion
@@ -19,10 +20,13 @@ public class UIManager : Singleton<UIManager>
     public TextMeshProUGUI TimeTextMeshPro
     {
         get => m_TimeTextMesh;
-        set
-        {
-            m_TimeTextMesh = value;
-        }
+        set => m_TimeTextMesh = value;
+    }
+    public TextMeshProUGUI TempTextMeshPro
+    {
+        get => m_TempTextMesh;
+        set => m_TempTextMesh = value;
+
     }
     #endregion
     #region Funcs

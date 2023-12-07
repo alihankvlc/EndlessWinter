@@ -7,9 +7,11 @@ using UnityEngine;
 public class TimeTracker : ScriptableObject
 {
     #region Variables
-    [Range(1, 6)][SerializeField] private int m_InitialDay;
-    [Range(0, 23)][SerializeField] private int m_InitialHours;
-    [Range(0, 59)][SerializeField] private int m_InitialMinutes;
+    [Range(1, 6), SerializeField] private int m_InitialDay;
+    [Range(0, 23), SerializeField] private int m_InitialHours;
+    [Range(0, 59), SerializeField] private int m_InitialMinutes;
+    [Range(0, 23), SerializeField] private int m_SunriseTime;
+    [Range(0, 23), SerializeField] private int m_SunsetTime;
     [SerializeField] private float m_TimeMultipler;
 
     private int m_Days = 1;
@@ -18,9 +20,9 @@ public class TimeTracker : ScriptableObject
     private float m_ElapsedSeconds;
     private List<string> m_DaysList;
 
-    public event EventHandler<TimeChangedEventArgs> DayChangedEvent;
-    public event EventHandler<TimeChangedEventArgs> HourChangedEvent;
-    public event EventHandler<TimeChangedEventArgs> MinuteChangedEvent;
+    public event EventHandler<StateChangedEventArgs> DayChangedEvent;
+    public event EventHandler<StateChangedEventArgs> HourChangedEvent;
+    public event EventHandler<StateChangedEventArgs> MinuteChangedEvent;
     #endregion
     #region Property
     public int Day
@@ -51,9 +53,9 @@ public class TimeTracker : ScriptableObject
     {
         if (!Application.isPlaying)
         {
-            m_Days = m_InitialDay;
-            m_Hours = m_InitialHours;
-            m_Minute = m_InitialMinutes;
+            m_Days = m_InitialDay = Day;
+            m_Hours = m_InitialHours = Hour;
+            m_Minute = m_InitialMinutes = Minute;
 
             UIManager.Instance.TimeTextMeshPro?.SetText(GetFormattedTime());
         }
@@ -82,22 +84,24 @@ public class TimeTracker : ScriptableObject
     private void IncrementHour()
     {
         Hour++;
+        m_InitialHours++;
         if (Hour > 23)
         {
             Hour = 0;
             Day++;
         }
     }
-    private void SetAndInvokeIfChanged(ref int field, int param, Action action)
+    private void SetAndInvokeIfChanged(ref int field, int value, Action action)
     {
-        if (field != param)
+        if (field != value)
         {
-            field = param;
+            field = value;
             action?.Invoke();
         }
     }
-    protected virtual void OnDayChanged() => DayChangedEvent?.Invoke(this, new TimeChangedEventArgs(Day));
-    protected virtual void OnHourChanged() => HourChangedEvent?.Invoke(this, new TimeChangedEventArgs(Hour));
-    protected virtual void OnMinuteChanged() => MinuteChangedEvent?.Invoke(this, new TimeChangedEventArgs(Minute));
+
+    protected virtual void OnDayChanged() => DayChangedEvent?.Invoke(this, new StateChangedEventArgs(Day));
+    protected virtual void OnHourChanged() => HourChangedEvent?.Invoke(this, new StateChangedEventArgs(Hour));
+    protected virtual void OnMinuteChanged() => MinuteChangedEvent?.Invoke(this, new StateChangedEventArgs(Minute));
     #endregion
 }

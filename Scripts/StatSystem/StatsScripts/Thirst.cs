@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 namespace EndlessWinter.Stat
 {
     [CreateAssetMenu(fileName = "Thirst", menuName = "EndlessWinter/CreateStat/Thirst")]
@@ -9,7 +10,7 @@ namespace EndlessWinter.Stat
         {
             get => base.Modify;
             set => base.Modify = value;
-        } 
+        }
         #endregion
     }
 }

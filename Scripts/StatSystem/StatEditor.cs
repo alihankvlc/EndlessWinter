@@ -52,7 +52,7 @@ namespace EndlessWinter.Stat
             if (stat is Health) return StatType.Health;
             if (stat is Stamina) return StatType.Stamina;
             if (stat is Fatigue) return StatType.Fatigue;
-            if (stat is Temperature) return StatType.Temperature;
+            if (stat is BodyTemperature) return StatType.Temperature;
             if (stat is Hunger) return StatType.Hunger;
             if (stat is Thirst) return StatType.Thirst;
 

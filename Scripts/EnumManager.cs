@@ -73,10 +73,13 @@ public enum ClothesType
 public enum WeatherType
 {
     None,
-    Default,
+    Sunny,
     Cloudy,
-    Rainy,
     Snowy,
-    Storm
+    Stormy,
+    Foggy,
+    Windy,
+    Freezing,
+    Tornado,
 }
 #endregion

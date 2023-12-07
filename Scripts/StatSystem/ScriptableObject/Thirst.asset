@@ -17,7 +17,10 @@ MonoBehaviour:
   MaxValue: 100
   CustomColor: {r: 1, g: 1, b: 1, a: 1}
   ThresholdColor: {r: 1, g: 0, b: 0, a: 1}
+  IncreaseArrowColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  DecreaseArrowColor: {r: 1, g: 0, b: 0, a: 1}
   Inform: Null
   FadeInDuration: 0.35
   FadeOutDuration: 0.35
   Delay: 0.15
+  StatChangedAmount: -140

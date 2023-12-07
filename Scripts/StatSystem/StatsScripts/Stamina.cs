@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 namespace EndlessWinter.Stat
 {
     [CreateAssetMenu(fileName = "Stamina", menuName = "EndlessWinter/CreateStat/Stamina")]
