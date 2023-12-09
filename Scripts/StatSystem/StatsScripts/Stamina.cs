@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using UnityEngine;
-namespace EndlessWinter.Stat
+﻿namespace EndlessWinter.Stat
 {
+    using UnityEngine;
+
     [CreateAssetMenu(fileName = "Stamina", menuName = "EndlessWinter/CreateStat/Stamina")]
     public class Stamina : Stat
     {

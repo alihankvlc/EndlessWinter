@@ -1,11 +1,12 @@
-using UnityEngine.Rendering.Universal;
-using UnityEngine.InputSystem;
-using UnityEngine;
-using EndlessWinter.Stat;
-using System;
-
 namespace Player
 {
+    using UnityEngine.Rendering.Universal;
+    using UnityEngine.InputSystem;
+    using UnityEngine;
+    using EndlessWinter;
+    using EndlessWinter.Stat;
+    using System;
+
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(PlayerInput))]
@@ -27,16 +28,9 @@ namespace Player
         private float m_Speed;
         private bool m_CanRunning;
         #endregion
-        #region PlayerStatsVariables
-        [Header("Player Stats Variables")]
-        [Header("Stamina")]
-        [SerializeField]
-        private float m_StaminaValue;
-        #endregion
         #region CameraVariables
         [Header("Camera Variables")]
-        [SerializeField]
-        private Transform m_CameraRoot;
+        [SerializeField] private Transform m_CameraRoot;
         [SerializeField] private GameObject m_ThirdPersonCamera;
         [SerializeField] private Transform m_TPSCameraTransform;
         [SerializeField] private Transform m_FPSCameraTransform;
@@ -87,15 +81,18 @@ namespace Player
             CameraRotation();
             SetChangeViewMode();
 
-            m_PlayerViewMode = m_Input.changeView ? ViewMode.ThirdPerson : ViewMode.FirstPerson;
+            m_PlayerViewMode = m_Input.ChangeView ? ViewMode.ThirdPerson : ViewMode.FirstPerson;
         }
         #region Movement
         private void Movement()
         {
-            m_TargetSpeed = m_Input.move != Vector2.zero ? (m_Input.run & m_CanRunning ? m_RunSpeed : m_WalkSpeed) : 0;
+            Fatigue fatigue = StatManager.Instance.GetStat<Fatigue>();
+            Stamina stamina = StatManager.Instance.GetStat<Stamina>();
 
-            Vector3 inputDirection = new Vector3(m_Input.move.x, 0.0f,
-                m_Input.move.y);
+            m_TargetSpeed = m_Input.Move != Vector2.zero ? (m_Input.Run & m_CanRunning ? m_RunSpeed : m_WalkSpeed) : 0;
+
+            Vector3 inputDirection = new Vector3(m_Input.Move.x, 0.0f,
+                m_Input.Move.y);
 
             float currentSpeed = new Vector3(m_Controller.velocity.x, 0.0f, m_Controller.velocity.z).magnitude;
             float speedOffset = m_Threshold;
@@ -107,7 +104,7 @@ namespace Player
                     (currentSpeed, m_TargetSpeed * 1, Time.deltaTime * m_SpeedChangeOffset);
             }
 
-            if (m_Input.move != Vector2.zero && !m_Input.watchViewed)
+            if (m_Input.Move != Vector2.zero)
             {
                 m_TargetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
                                    m_CameraMain.transform.eulerAngles.y;
@@ -124,30 +121,26 @@ namespace Player
 
             m_Controller.Move(moveDirection * m_Speed * Time.deltaTime);
 
-            m_StaminaValue = StatManager.Instance.GetStat<Stamina>().CurrentValue;
-            m_CanRunning = m_StaminaValue > 0;
+            m_CanRunning = stamina.CurrentValue > 0 && fatigue.CurrentValue > 0;
 
             float staminaChangeAmount = 0f;
 
-            /*Statlara StatManager instance üzerinden deðil direk stamina sýnýfýnýn örneðini üzerinden
-            eriþebilirim.......*/
-
-            if (m_Input.run && m_CanRunning && m_Input.move != Vector2.zero)
+            if (m_Input.Run && m_CanRunning && m_Input.Move != Vector2.zero)
             {
-                staminaChangeAmount = -Time.deltaTime * StatManager.Instance.GetStat<Stamina>().DecreaseAmount;
+                staminaChangeAmount = -Time.deltaTime * stamina.DecreaseAmount;
+                fatigue.DecreaseFatigue(MovementType.Run);
             }
-            else if (!m_Input.run && staminaChangeAmount != StatManager.Instance.GetStat<Stamina>().MaxValue)
+            else if (!m_Input.Run && staminaChangeAmount != stamina.MaxValue)
             {
-                staminaChangeAmount = Time.deltaTime * StatManager.Instance.GetStat<Stamina>().IncreaseAmount;
+                staminaChangeAmount = Time.deltaTime * stamina.IncreaseAmount;
             }
 
-            StatManager.Instance.GetStat<Stamina>().Modify += staminaChangeAmount;
-
+            stamina.Modify += staminaChangeAmount;
 
             m_MovementAnimBlend = Mathf.MoveTowards(m_MovementAnimBlend,
                 m_TargetSpeed, Time.deltaTime * m_SpeedChangeOffset);
 
-            if (m_MovementAnimBlend < m_Threshold & m_Input.move == Vector2.zero)
+            if (m_MovementAnimBlend < m_Threshold & m_Input.Move == Vector2.zero)
                 m_MovementAnimBlend = 0.0f;
 
             m_Animator.SetFloat(m_SpeedHash, m_MovementAnimBlend);
@@ -156,10 +149,10 @@ namespace Player
         #region CameraRotation
         private void CameraRotation()
         {
-            if (m_Input.look.sqrMagnitude > m_Threshold)
+            if (m_Input.Look.sqrMagnitude > m_Threshold)
             {
-                m_CameraTargetYaw += m_Input.look.x * m_MouseSensitivity * Time.deltaTime;
-                m_CameraTargetPitch -= m_Input.look.y * m_MouseSensitivity * Time.deltaTime;
+                m_CameraTargetYaw += m_Input.Look.x * m_MouseSensitivity * Time.deltaTime;
+                m_CameraTargetPitch -= m_Input.Look.y * m_MouseSensitivity * Time.deltaTime;
 
                 m_CameraTargetPitch = Mathf.Clamp(m_CameraTargetPitch, m_CameraUpperClamp, m_CameraBottomClamp);
             }

@@ -1,8 +1,7 @@
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace EndlessWinter.Stat
 {
+    using System.Collections.Generic;
+    using UnityEngine;
     public abstract class Stat : ScriptableObject
     {
         #region Variables
@@ -13,9 +12,8 @@ namespace EndlessWinter.Stat
         [SerializeField] internal int MaxValue = 100;
         [SerializeField] internal Color CustomColor = Color.white;
         [SerializeField] internal Color ThresholdColor = Color.red;
-        [SerializeField] internal Color IncreaseArrowColor = Color.yellow;
-        [SerializeField] internal Color DecreaseArrowColor = Color.red;
         [SerializeField,] internal string Inform = "Null";
+        [SerializeField] internal AudioClip InformSoundEffect;
         [Header("Increase & Decrease Arrow Settings")]
         [SerializeField] internal float FadeInDuration = 0.35f;
         [SerializeField] internal float FadeOutDuration = 0.35f;

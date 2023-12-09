@@ -1,13 +1,14 @@
-using EndlessWinter.Weather;
-using System;
-using UnityEngine;
-
-public class StateChangedEventArgs : EventArgs
+namespace EndlessWinter.Weather
 {
-    public int Time;
-    public Weather Weather;
-    public bool IsNight;
-    public StateChangedEventArgs(int Time) => this.Time = Time;
-    public StateChangedEventArgs(Weather weather) => this.Weather = weather;
-    public StateChangedEventArgs(bool isNight) => this.IsNight = isNight;
+    using System;
+    using UnityEngine;
+    using EndlessWinter.Weather;
+    public class StateChangedEventArgs : EventArgs
+    {
+        public int Time;
+        public Weather Weather;
+        public StateChangedEventArgs(int Time) => this.Time = Time;
+        public StateChangedEventArgs(Weather weather) => this.Weather = weather;
+    }
 }
+

@@ -15,15 +15,13 @@ public class InputManager : MonoBehaviour
     private InputAction m_JumpInputAction;
     private InputAction m_CrouchInputAction;
     private InputAction m_ChangeViewInputAction;
-    private InputAction m_WatchViewedInputAction;
 
-    public Vector2 move { get; private set; }
-    public Vector2 look { get; private set; }
-    public bool run { get; private set; }
-    public bool jump { get; private set; }
-    public bool crouch { get; private set; }
-    public bool changeView { get; private set; }
-    public bool watchViewed { get; private set; }
+    public Vector2 Move { get; private set; }
+    public Vector2 Look { get; private set; }
+    public bool Run { get; private set; }
+    public bool Jump { get; private set; }
+    public bool Crouch { get; private set; }
+    public bool ChangeView { get; private set; }
 
     private void Awake()
     {
@@ -35,7 +33,6 @@ public class InputManager : MonoBehaviour
         m_JumpInputAction = m_InputActionMap.FindAction("Jump");
         m_CrouchInputAction = m_InputActionMap.FindAction("Crouch");
         m_ChangeViewInputAction = m_InputActionMap.FindAction("ChangeViewMode");
-        m_WatchViewedInputAction = m_InputActionMap.FindAction("WatchViewed");
     }
     private void OnEnable() => m_InputActionMap.Enable();
     private void OnDisable() => m_InputActionMap.Disable();
@@ -57,15 +54,11 @@ public class InputManager : MonoBehaviour
         m_JumpInputAction.canceled += OnJump;
 
         m_ChangeViewInputAction.started += OnChangeViewMode;
-
-        m_WatchViewedInputAction.performed += OnWatchViewed;
-        m_WatchViewedInputAction.canceled += OnWatchViewed;
     }
-    private void OnMove(InputAction.CallbackContext context) => move = context.ReadValue<Vector2>();
-    private void OnLook(InputAction.CallbackContext context) => look = context.ReadValue<Vector2>();
-    private void OnRun(InputAction.CallbackContext context) => run = context.ReadValueAsButton();
-    private void OnCrouch(InputAction.CallbackContext context) => crouch = context.ReadValueAsButton();
-    private void OnJump(InputAction.CallbackContext context) => jump = context.ReadValueAsButton();
-    private void OnWatchViewed(InputAction.CallbackContext context) => watchViewed = context.ReadValueAsButton();
-    private void OnChangeViewMode(InputAction.CallbackContext context) => changeView = !changeView;
+    private void OnMove(InputAction.CallbackContext context) => Move = context.ReadValue<Vector2>();
+    private void OnLook(InputAction.CallbackContext context) => Look = context.ReadValue<Vector2>();
+    private void OnRun(InputAction.CallbackContext context) => Run = context.ReadValueAsButton();
+    private void OnCrouch(InputAction.CallbackContext context) => Crouch = context.ReadValueAsButton();
+    private void OnJump(InputAction.CallbackContext context) => Jump = context.ReadValueAsButton();
+    private void OnChangeViewMode(InputAction.CallbackContext context) => ChangeView = !ChangeView;
 }

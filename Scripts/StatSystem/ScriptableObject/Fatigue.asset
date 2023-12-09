@@ -18,6 +18,17 @@ MonoBehaviour:
   CustomColor: {r: 1, g: 1, b: 1, a: 1}
   ThresholdColor: {r: 1, g: 0, b: 0, a: 1}
   Inform: Null
+  InformSoundEffect: {fileID: 0}
   FadeInDuration: 0.35
   FadeOutDuration: 0.35
   Delay: 0.15
+  StatChangedAmount: -0.15882826
+  m_RunningFatigueValue: 5
+  m_WalkingFatigueValue: 2
+  m_CrouchFatigueValue: 0
+  m_JumpingFatigueValue: 0
+  m_IncreaseDuration: 7
+  m_DecreaseDuration: 4
+  m_MovementUpdateDuration: 2
+  m_DecreaseAmount: 2
+  m_IncreaseAmount: 3

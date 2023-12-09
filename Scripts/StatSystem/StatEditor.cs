@@ -31,7 +31,7 @@ namespace EndlessWinter.Stat
             }
             else
             {
-                Debug.LogWarning("<color=green>Changes can only be made in editor mode.</color>");
+                //Debug.LogWarning("<color=green>Changes can only be made in editor mode.</color>");
             }
         }
 

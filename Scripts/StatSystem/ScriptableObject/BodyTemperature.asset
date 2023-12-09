@@ -10,23 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d12befefce1f4743bea536c9266ea0e, type: 3}
-  m_Name: Temperature
+  m_Name: BodyTemperature
   m_EditorClassIdentifier: 
   Type: 3
-  CurrentValue: 99.5
+  CurrentValue: 20
   MaxValue: 100
   CustomColor: {r: 1, g: 1, b: 1, a: 1}
   ThresholdColor: {r: 1, g: 0, b: 0, a: 1}
-  IncreaseArrowColor: {r: 0.015686274, g: 0.5641947, b: 1, a: 1}
-  DecreaseArrowColor: {r: 1, g: 0, b: 0, a: 1}
-  Inform: Null
+  Inform: I need to start a fire, or I will freeze to death here.
+  InformSoundEffect: {fileID: 8300000, guid: 48148d59b95b69542ba4cf464ccf10d0, type: 3}
   FadeInDuration: 0.35
   FadeOutDuration: 0.35
   Delay: 0.15
-  StatChangedAmount: -0.5
-  m_InitialTemp: 0
-  m_minTemp: 0
-  m_MaxTemp: 0
-  m_ColdWeatherEffect: 0
-  m_ClothingEffect: 5
-  m_InBuildingTempBonus: 10
+  StatChangedAmount: -0.75986624
+  BuildingInTempBonus: 7
+  IsFireTempBonus: 25
+  DecreaseTempdivisor: 5
+  ClothesTempBonus: []
+  m_IsInBuilding: 0
+  m_IsInFire: 0

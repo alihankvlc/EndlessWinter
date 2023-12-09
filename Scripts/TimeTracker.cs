@@ -1,30 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using EndlessWinter.Manager;
+using System;
 using UnityEngine;
+using EndlessWinter.Weather;
 
 [CreateAssetMenu(fileName = "TimeTracker", menuName = "EndlessWinter/CreateTimeTracker")]
 public class TimeTracker : ScriptableObject
 {
     #region Variables
-    [Range(1, 6), SerializeField] private int m_InitialDay;
-    [Range(0, 23), SerializeField] private int m_InitialHours;
-    [Range(0, 59), SerializeField] private int m_InitialMinutes;
-    [Range(0, 23), SerializeField] private int m_SunriseTime;
-    [Range(0, 23), SerializeField] private int m_SunsetTime;
-    [SerializeField] private float m_TimeMultipler;
+    [Range(0, 23)][SerializeField] private int m_SunriseHour = 6;
+    [Range(0, 23)][SerializeField] private int m_SunsetHour = 18;
+    [SerializeField] private float m_TimeMultiplier = 1f;
 
     private int m_Days = 1;
     private int m_Hours;
     private int m_Minute;
+    private bool m_IsNight;
+
     private float m_ElapsedSeconds;
     private List<string> m_DaysList;
 
     public event EventHandler<StateChangedEventArgs> DayChangedEvent;
     public event EventHandler<StateChangedEventArgs> HourChangedEvent;
     public event EventHandler<StateChangedEventArgs> MinuteChangedEvent;
+
+    public event Action SunriseEvent;
+    public event Action SunsetEvent;
+
     #endregion
-    #region Property
+
+    #region Properties
+    public bool IsNight => m_IsNight;
     public int Day
     {
         get => m_Days;
@@ -41,35 +48,42 @@ public class TimeTracker : ScriptableObject
         private set => SetAndInvokeIfChanged(ref m_Minute, value, OnMinuteChanged);
     }
     #endregion
-    #region Funcs
-    private void OnEnable()
+
+    #region Functions
+    public void InitializeTimeTracker()
     {
         string[] daysArray = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
         m_DaysList = daysArray.ToList();
-
-        UIManager.Instance.TimeTextMeshPro?.SetText(GetFormattedTime());
-    }
-    private void OnValidate()
-    {
-        if (!Application.isPlaying)
-        {
-            m_Days = m_InitialDay = Day;
-            m_Hours = m_InitialHours = Hour;
-            m_Minute = m_InitialMinutes = Minute;
-
-            UIManager.Instance.TimeTextMeshPro?.SetText(GetFormattedTime());
-        }
+        m_Days = 1;
+        UIManager.Instance.TMP_Time?.SetText(GetFormattedTime());
     }
     public string GetFormattedTime() =>
-    $"DAY:{Day} {Hour:D2}:{Minute:D2}\n{m_DaysList[(m_Days + 6) % m_DaysList.Count]}";
+        $"DAY:{Day} {Hour:D2}:{Minute:D2}\n{m_DaysList[(m_Days + 6) % m_DaysList.Count]}";
+
     public void UpdateTime()
     {
-        m_ElapsedSeconds += Time.deltaTime * m_TimeMultipler;
+        m_ElapsedSeconds += Time.deltaTime * m_TimeMultiplier;
         while (m_ElapsedSeconds > 59)
         {
             IncrementMinute();
+            UpdateDayNightStatus();
             m_ElapsedSeconds -= 60;
-            UIManager.Instance.TimeTextMeshPro?.SetText(GetFormattedTime());
+            UIManager.Instance.TMP_Time?.SetText(GetFormattedTime());
+        }
+    }
+
+    private void UpdateDayNightStatus()
+    {
+        bool isNight = Hour < m_SunriseHour || Hour >= m_SunsetHour;
+
+        if (isNight != m_IsNight)
+        {
+            if (isNight)
+                SunsetEvent.Invoke();
+            else
+                SunriseEvent?.Invoke();
+
+            m_IsNight = isNight;
         }
     }
     private void IncrementMinute()
@@ -84,7 +98,7 @@ public class TimeTracker : ScriptableObject
     private void IncrementHour()
     {
         Hour++;
-        m_InitialHours++;
+
         if (Hour > 23)
         {
             Hour = 0;
@@ -99,9 +113,12 @@ public class TimeTracker : ScriptableObject
             action?.Invoke();
         }
     }
-
-    protected virtual void OnDayChanged() => DayChangedEvent?.Invoke(this, new StateChangedEventArgs(Day));
-    protected virtual void OnHourChanged() => HourChangedEvent?.Invoke(this, new StateChangedEventArgs(Hour));
-    protected virtual void OnMinuteChanged() => MinuteChangedEvent?.Invoke(this, new StateChangedEventArgs(Minute));
+    protected virtual void OnDayChanged() =>
+        DayChangedEvent?.Invoke(this, new StateChangedEventArgs(Day));
+    protected virtual void OnHourChanged() =>
+        HourChangedEvent?.Invoke(this, new StateChangedEventArgs(Hour));
+    protected virtual void OnMinuteChanged() =>
+        MinuteChangedEvent?.Invoke(this, new StateChangedEventArgs(Minute));
     #endregion
 }
+

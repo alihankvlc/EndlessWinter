@@ -1,8 +1,9 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using DG.Tweening;
-namespace EndlessWinter.Stat
+﻿namespace EndlessWinter.Stat
 {
+    using UnityEngine;
+    using UnityEngine.UI;
+    using DG.Tweening;
+
     [System.Serializable]
     /*Yeniden düzenlenecek....*/
     public class UIStatUpdater
@@ -10,14 +11,17 @@ namespace EndlessWinter.Stat
         #region Variables
         public Stat Stat;
         public Slider Slider;
-        public Image[] StatArrow;
-
+        public Image[] StatArrowImageArray;
+        public Image FillAreaImage;
         private int m_PreviousStatNotifyRate;
         private int m_ArrowRate;
 
         private bool m_ReverseArrayExecuted;
         private Sequence m_Sequence;
 
+        public const int FIRST_LEVEL = 1;
+        public const int SECOND_LEVEL = 2;
+        public const int THIRD_LEVEL = 3;
         #endregion
         #region Property
         public int GetDisplayCount
@@ -27,7 +31,6 @@ namespace EndlessWinter.Stat
             {
                 if (ShouldUpdateArrowRate(value))
                 {
-
                     if (Stat.Type == StatType.Stamina) { return; }
 
                     m_ArrowRate = value;
@@ -50,16 +53,16 @@ namespace EndlessWinter.Stat
 
 
             SetFillRectColors();
-
+            FillAreaImage.color = Stat.CurrentValue <= 0 ? Color.red : Color.white;
         }
         private void AnimateStatChange(float value)
         {
-            if (IsValueInRange(value, -1, 0)) GetDisplayCount = -1;
-            else if (IsValueInRange(value, -3, -1)) GetDisplayCount = -2;
-            else if (IsValueInRange(value, float.MinValue, -3)) GetDisplayCount = -3;
-            else if (IsValueInRange(value, 0.1f, 1)) GetDisplayCount = 1;
-            else if (IsValueInRange(value, 1, 3)) GetDisplayCount = 2;
-            else if (IsValueInRange(value, 3, float.MaxValue)) GetDisplayCount = 3;
+            if (IsValueInRange(value, -2, 0)) GetDisplayCount = -FIRST_LEVEL;
+            else if (IsValueInRange(value, -5, -2)) GetDisplayCount = -SECOND_LEVEL;
+            else if (IsValueInRange(value, float.MinValue, -5)) GetDisplayCount = -THIRD_LEVEL;
+            else if (IsValueInRange(value, 0.05f, 2f)) GetDisplayCount = FIRST_LEVEL;
+            else if (IsValueInRange(value, 2f, 5)) GetDisplayCount = SECOND_LEVEL;
+            else if (IsValueInRange(value, 5, float.MaxValue)) GetDisplayCount = THIRD_LEVEL;
         }
 
         private bool IsValueInRange(float value, float minValue, float maxValue)
@@ -75,15 +78,10 @@ namespace EndlessWinter.Stat
             Image sliderFillRectImage = Slider.fillRect.GetComponent<Image>();
             sliderFillRectImage.color = targetColor;
         }
-        private void SetArrowColors(Color color)
-        {
-            for (int i = 0; i < Mathf.Abs(m_ArrowRate); i++)
-                StatArrow[i].DOColor(color, 1f);
-        }
         private void InitializeArrows(int rate)
         {
-            for (int i = 0; i < StatArrow.Length; i++)
-                SetArrowProperties(StatArrow[i], i < rate);
+            for (int i = 0; i < StatArrowImageArray.Length; i++)
+                SetArrowProperties(StatArrowImageArray[i], i < rate);
         }
         private void RestartArrowAnimation(int rate)
         {
@@ -114,15 +112,15 @@ namespace EndlessWinter.Stat
             m_Sequence = DOTween.Sequence(rate);
 
             for (int i = 0; i < Mathf.Abs(rate); i++)
-                m_Sequence.Append(StatArrow[i].DOFade(1f, Stat.FadeInDuration));
+                m_Sequence.Append(StatArrowImageArray[i].DOFade(1f, Stat.FadeInDuration));
 
             m_Sequence.AppendInterval(Stat.Delay);
 
             for (int i = 0; i < Mathf.Abs(rate); i++)
-                m_Sequence.Append(StatArrow[i].DOFade(0.5f, Stat.FadeOutDuration)).OnComplete(() =>
+                m_Sequence.Append(StatArrowImageArray[i].DOFade(0.5f, Stat.FadeOutDuration)).OnComplete(() =>
                 {
                     for (int i = 0; i < Mathf.Abs(rate); i++)
-                        StatArrow[i].transform.DOScale(Vector3.zero, 1).OnComplete(() =>
+                        StatArrowImageArray[i].transform.DOScale(Vector3.zero, 1).OnComplete(() =>
                           {
                               DeactivateAllArrows();
                               m_ArrowRate = 0;
@@ -133,20 +131,20 @@ namespace EndlessWinter.Stat
         }
         private void ResetArrows()
         {
-            foreach (Image arrow in StatArrow)
+            foreach (Image arrow in StatArrowImageArray)
                 SetArrowProperties(arrow, false);
         }
         private void DeactivateAllArrows()
         {
-            foreach (Image arrow in StatArrow)
+            foreach (Image arrow in StatArrowImageArray)
                 arrow.gameObject.SetActive(false);
         }
         private void ActivateSpecificArrows(int rate)
         {
             for (int i = 0; i < Mathf.Abs(rate); i++)
             {
-                StatArrow[i].gameObject.SetActive(true);
-                StatArrow[i].transform.DOScale(Vector3.one, 1.5f);
+                StatArrowImageArray[i].gameObject.SetActive(true);
+                StatArrowImageArray[i].transform.DOScale(Vector3.one, 1.5f);
             }
         }
         private void KillExistingSequence()
@@ -164,15 +162,13 @@ namespace EndlessWinter.Stat
         {
             if (!m_ReverseArrayExecuted && rate < 0)
             {
-                System.Array.Reverse(StatArrow);
+                System.Array.Reverse(StatArrowImageArray);
                 m_ReverseArrayExecuted = true;
-                SetArrowColors(Stat.DecreaseArrowColor);
             }
             else if (m_ReverseArrayExecuted && rate > 0)
             {
-                System.Array.Reverse(StatArrow);
+                System.Array.Reverse(StatArrowImageArray);
                 m_ReverseArrayExecuted = false;
-                SetArrowColors(Stat.IncreaseArrowColor);
             }
         }
 

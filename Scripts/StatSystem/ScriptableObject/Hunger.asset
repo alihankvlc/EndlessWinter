@@ -21,3 +21,4 @@ MonoBehaviour:
   FadeInDuration: 0.35
   FadeOutDuration: 0.35
   Delay: 0.15
+  StatChangedAmount: -0.099998474

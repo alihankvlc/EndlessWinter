@@ -1,6 +1,7 @@
-﻿using UnityEngine;
-namespace EndlessWinter.Stat
+﻿namespace EndlessWinter.Stat
 {
+    using UnityEngine;
+
     [CreateAssetMenu(fileName = "Health", menuName = "EndlessWinter/CreateStat/Health")]
     public class Health : Stat
     {
