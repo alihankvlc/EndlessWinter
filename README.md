@@ -12,4 +12,4 @@ Collect System,
 Inventory System,
 AI Enemey System
 
-![ezgif com-video-to-gif-converted](https://github.com/alihankvlc/EndlessWinter/assets/147824938/3938b392-63c9-4181-8b5e-7ab646e9a7bd)
+![ezgif com-video-to-gif-converted (1)](https://github.com/alihankvlc/EndlessWinter/assets/147824938/bfb5f841-f588-40c8-beaa-9c0f1b2a1c10)
