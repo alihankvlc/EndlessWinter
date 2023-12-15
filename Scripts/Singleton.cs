@@ -4,7 +4,7 @@
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static T m_Instance;
-
+        public static new bool DontDestroyOnLoad = false;
         public static T Instance
         {
             get
@@ -31,6 +31,8 @@
             }
             else
             {
+                if (!DontDestroyOnLoad) return;
+
                 m_Instance = this as T;
                 DontDestroyOnLoad(gameObject);
             }

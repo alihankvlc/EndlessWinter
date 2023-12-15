@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BodyTemperature
   m_EditorClassIdentifier: 
   Type: 3
-  CurrentValue: 20
+  CurrentValue: 100
   MaxValue: 100
   CustomColor: {r: 1, g: 1, b: 1, a: 1}
   ThresholdColor: {r: 1, g: 0, b: 0, a: 1}
@@ -22,7 +22,7 @@ MonoBehaviour:
   FadeInDuration: 0.35
   FadeOutDuration: 0.35
   Delay: 0.15
-  StatChangedAmount: -0.75986624
+  StatChangedAmount: -3.782591
   BuildingInTempBonus: 7
   IsFireTempBonus: 25
   DecreaseTempdivisor: 5

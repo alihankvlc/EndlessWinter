@@ -58,15 +58,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "WatchViewed",
-                    "type": "Button",
-                    "id": "3a040c71-2504-4b5e-b403-059158475c1d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -179,15 +170,32 @@
                     "action": "ChangeViewMode",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
+                }
+            ]
+        },
+        {
+            "name": "UIWindow",
+            "id": "88773d76-e6a8-423a-a657-d48742f601da",
+            "actions": [
+                {
+                    "name": "ShowInventory",
+                    "type": "Button",
+                    "id": "ba3cfe81-8371-4313-aba1-3c12d4862f41",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
                 {
                     "name": "",
-                    "id": "a48f5114-44a8-4522-97b6-cdb7409d1f4b",
-                    "path": "<Keyboard>/tab",
+                    "id": "5aa7513b-deae-4440-960a-2159d5fc2bce",
+                    "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WatchViewed",
+                    "action": "ShowInventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

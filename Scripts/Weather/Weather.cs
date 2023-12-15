@@ -2,7 +2,7 @@ namespace EndlessWinter.Weather
 {
     using System.Collections.Generic;
     using UnityEngine;
-    using EndlessWinter.Manager;
+    using EndlessWinter.UI;
     using EndlessWinter;
     [CreateAssetMenu(fileName = "New_Weather", menuName = "EndlessWinter/CreateWeather")]
     public class Weather : ScriptableObject

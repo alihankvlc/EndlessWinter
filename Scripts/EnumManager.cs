@@ -24,6 +24,11 @@
         Crouch,
         Jump
     }
+    public enum SoundType
+    {
+        ButtonClick,
+        Environment
+    }
     #endregion
     #region StatSystem
     public enum StatType
@@ -75,6 +80,18 @@
         BodyWear,
         LegWear,
         FeetWear,
+    }
+    #endregion
+    #region InventorySystem
+    public enum ItemCategoryType
+    {
+        All,
+        Medicine,
+        Food,
+        Drink,
+        Clothes,
+        Weapon,
+        Resources,
     }
     #endregion
     #region WeatherSystem

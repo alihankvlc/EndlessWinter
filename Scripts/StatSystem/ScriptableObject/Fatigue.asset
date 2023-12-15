@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Fatigue
   m_EditorClassIdentifier: 
   Type: 4
-  CurrentValue: 100
-  MaxValue: 100
+  CurrentValue: 33.79368
+  MaxValue: 500
   CustomColor: {r: 1, g: 1, b: 1, a: 1}
   ThresholdColor: {r: 1, g: 0, b: 0, a: 1}
   Inform: Null
@@ -22,7 +22,7 @@ MonoBehaviour:
   FadeInDuration: 0.35
   FadeOutDuration: 0.35
   Delay: 0.15
-  StatChangedAmount: -0.15882826
+  StatChangedAmount: -0.66778946
   m_RunningFatigueValue: 5
   m_WalkingFatigueValue: 2
   m_CrouchFatigueValue: 0

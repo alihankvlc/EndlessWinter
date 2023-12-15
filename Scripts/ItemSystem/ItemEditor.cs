@@ -13,7 +13,7 @@ namespace EndlessWinter.Item
             serializedObject.Update();
 
             Item item = (Item)target;
-            item.ItemType = SetItemType(item);
+            item.Type = SetItemType(item);
         }
 
         private ItemType SetItemType(Item item)

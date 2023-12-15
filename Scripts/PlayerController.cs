@@ -1,21 +1,22 @@
 namespace Player
 {
+    using System;
     using UnityEngine.Rendering.Universal;
     using UnityEngine.InputSystem;
-    using UnityEngine;
     using EndlessWinter;
+    using EndlessWinter.InputController;
     using EndlessWinter.Stat;
-    using System;
+    using UnityEngine;
 
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(PlayerInput))]
-    [RequireComponent(typeof(InputManager))]
+    [RequireComponent(typeof(PlayerInputController))]
     public class PlayerController : MonoBehaviour
     {
         private CharacterController m_Controller;
         private Animator m_Animator;
-        private InputManager m_Input;
+        private PlayerInputController m_Input;
         #region PlayerMovementVariables
         [Header("Player Movement Variables")]
         [Min(1f)]
@@ -67,16 +68,17 @@ namespace Player
 
             m_Controller = GetComponent<CharacterController>();
             m_Animator = GetComponent<Animator>();
-            m_Input = GetComponent<InputManager>();
+            m_Input = GetComponent<PlayerInputController>();
 
             #endregion
-
-            Cursor.lockState = m_CursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
-            Cursor.visible = Cursor.lockState == CursorLockMode.Locked ? false : true;
             m_CameraMain = Camera.main;
         }
         private void Update()
         {
+            m_Input.CursorLock(true); // KALKACAK
+
+            if (UIWindowController.Instance.InventoryWindowIsOpen) return;
+
             Movement();
             CameraRotation();
             SetChangeViewMode();

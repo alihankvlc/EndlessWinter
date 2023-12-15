@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using EndlessWinter.Manager;
+using EndlessWinter.UI;
 using System;
 using UnityEngine;
 using EndlessWinter.Weather;
@@ -21,9 +21,9 @@ public class TimeTracker : ScriptableObject
     private float m_ElapsedSeconds;
     private List<string> m_DaysList;
 
-    public event EventHandler<StateChangedEventArgs> DayChangedEvent;
-    public event EventHandler<StateChangedEventArgs> HourChangedEvent;
-    public event EventHandler<StateChangedEventArgs> MinuteChangedEvent;
+    public event EventHandler<NotifyChangedEventArgs> DayChangedEvent;
+    public event EventHandler<NotifyChangedEventArgs> HourChangedEvent;
+    public event EventHandler<NotifyChangedEventArgs> MinuteChangedEvent;
 
     public event Action SunriseEvent;
     public event Action SunsetEvent;
@@ -114,11 +114,11 @@ public class TimeTracker : ScriptableObject
         }
     }
     protected virtual void OnDayChanged() =>
-        DayChangedEvent?.Invoke(this, new StateChangedEventArgs(Day));
+        DayChangedEvent?.Invoke(this, new NotifyChangedEventArgs(Day));
     protected virtual void OnHourChanged() =>
-        HourChangedEvent?.Invoke(this, new StateChangedEventArgs(Hour));
+        HourChangedEvent?.Invoke(this, new NotifyChangedEventArgs(Hour));
     protected virtual void OnMinuteChanged() =>
-        MinuteChangedEvent?.Invoke(this, new StateChangedEventArgs(Minute));
+        MinuteChangedEvent?.Invoke(this, new NotifyChangedEventArgs(Minute));
     #endregion
 }
 

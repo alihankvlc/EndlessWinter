@@ -1,4 +1,4 @@
-﻿namespace EndlessWinter.Manager
+﻿namespace EndlessWinter.UI
 {
     using DG.Tweening;
     using EndlessWinter.Stat;
@@ -9,13 +9,20 @@
 
     public class UIManager : Singleton<UIManager>
     {
-        #region Variables
-        [SerializeField] private List<UIStatUpdater> m_UIStatList = new List<UIStatUpdater>();
+        #region StatsSystem
+        [Header("Stat Variables")]
+        [SerializeField] private List<UIStat> m_UIStatList = new List<UIStat>();
+        private Dictionary<StatType, UIStat> m_UIStatDataCache = new Dictionary<StatType, UIStat>();
+        #endregion
+        #region InventorySystem
+        [Header("Inventory Variables")]
+        [SerializeField] private TextMeshProUGUI m_BackpackCategoryInformText;
+        #endregion
+        #region Notification
+        [Header("Notification Variables")]
         [SerializeField] private TextMeshProUGUI m_TMP_Time;
         [SerializeField] private TextMeshProUGUI m_TMP_Temp;
         [SerializeField] private TextMeshProUGUI m_TMP_Inform;
-        private Dictionary<StatType, UIStatUpdater> m_UIStatDataDic = new Dictionary<StatType, UIStatUpdater>();
-
         #endregion
         #region Property
         public TextMeshProUGUI TMP_Time
@@ -34,21 +41,40 @@
             set => m_TMP_Inform = value;
         }
         #endregion
-        #region Funcs
         protected override void Awake()
-            => DOTween.SetTweensCapacity(5000, 500);
+        {
+            DOTween.SetTweensCapacity(5000, 500);
+
+            EventManager.Instance.Subscribe<string>("UpdateBackpackCategoryText", E_UpdateItemCategoryText);
+            EventManager.Instance.Subscribe<ItemCategoryType>("IdentifyItemType", E_IdentifyItemType);
+        }
 
         private void Start()
-            => m_UIStatDataDic = m_UIStatList.ToDictionary(uiUpdater => uiUpdater.Stat.Type);
-
-        public UIStatUpdater UIStatUpdater(StatType type)
         {
-            if (m_UIStatDataDic.TryGetValue(type, out UIStatUpdater stat))
+            m_UIStatDataCache = m_UIStatList.ToDictionary(uiUpdater => uiUpdater.Stat.Type);
+        }
+        #region UIInventory
+        public void E_IdentifyItemType(ItemCategoryType type)
+        {
+            m_BackpackCategoryInformText.SetText(type.ToString());
+        }
+        public void E_UpdateItemCategoryText(string param)
+            => m_BackpackCategoryInformText.SetText(param);
+        #endregion
+        #region UIStat
+        public UIStat UIStatUpdater(StatType type)
+        {
+            if (m_UIStatDataCache.TryGetValue(type, out UIStat stat))
                 return stat;
 
             return null;
         }
         #endregion
+        public void OnDisable()
+        {
+            EventManager.Instance.Unsubscribe<string>("UpdateBackpackCategoryText", E_UpdateItemCategoryText);
+            EventManager.Instance.Unsubscribe<ItemCategoryType>("IdentifyItemType", E_IdentifyItemType);
+        }
     }
 }
 

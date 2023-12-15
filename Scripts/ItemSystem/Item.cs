@@ -9,12 +9,12 @@ namespace EndlessWinter.Item
     {
         #region Variables
         [Header("General Settings")]
-        [SerializeField] internal ItemType ItemType;
+        [SerializeField] internal ItemType Type;
         [SerializeField] internal RarityType Rarity;
         [SerializeField] internal Sprite Icon;
         [SerializeField] internal GameObject Prefab;
         [SerializeField] internal int Id;
-        [SerializeField] internal string Name;
+        [SerializeField] internal string DisplayName;
         [SerializeField] internal float Weight;
         [SerializeField] internal float Durability;
         [SerializeField] internal bool IsStackable;

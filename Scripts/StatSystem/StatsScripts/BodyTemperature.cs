@@ -1,7 +1,7 @@
 ﻿namespace EndlessWinter.Stat
 {
     using EndlessWinter.Item;
-    using EndlessWinter.Manager;
+    using EndlessWinter.UI;
     using System.Collections.Generic;
     using UnityEngine;
     /*

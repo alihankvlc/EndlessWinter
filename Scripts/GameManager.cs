@@ -1,4 +1,4 @@
-﻿using EndlessWinter.Manager;
+﻿using EndlessWinter.UI;
 using EndlessWinter.Stat;
 using EndlessWinter.Weather;
 using EndlessWinter;
@@ -9,7 +9,7 @@ using UnityEngine;
 using System.Linq;
 
 [Serializable]
-public class OnTimeChangedEvent : UnityEvent<StateChangedEventArgs> { }
+public class OnTimeChangedEvent : UnityEvent<NotifyChangedEventArgs> { }
 
 public class GameManager : Singleton<GameManager>
 {
@@ -85,9 +85,14 @@ public class GameManager : Singleton<GameManager>
             UpdateWeatherTemp();
 
         StatManager.Instance.GetStat<Fatigue>().UpdateFatigue();
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            EventManager.Instance.TriggerEvent("PlaySound", SoundType.Environment);
+        }
     }
     #region WeatherFuncs
-    private void UpdateWeather(StateChangedEventArgs e)
+    private void UpdateWeather(NotifyChangedEventArgs e)
     {
         if (m_CanDetermineWeather)
             DetermineNextWeather();
@@ -129,7 +134,7 @@ public class GameManager : Singleton<GameManager>
     }
     #endregion
     #region m_Funcs
-    private void GetWeatherNotify(StateChangedEventArgs e)
+    private void GetWeatherNotify(NotifyChangedEventArgs e)
     {
         if (m_CanChangeTemp) return;
 
@@ -153,11 +158,11 @@ public class GameManager : Singleton<GameManager>
         }
     }
     #region InitializeUnityEventFuncs
-    private void Tracker_DayChangedEvent(object sender, StateChangedEventArgs e)
+    private void Tracker_DayChangedEvent(object sender, NotifyChangedEventArgs e)
     => m_ChangeDayEvent?.Invoke(e);
-    private void Tracker_HourChangedEvent(object sender, StateChangedEventArgs e)
+    private void Tracker_HourChangedEvent(object sender, NotifyChangedEventArgs e)
         => m_ChangeHourEvent?.Invoke(e);
-    private void Tracker_MinuteChangedEvent(object sender, StateChangedEventArgs e)
+    private void Tracker_MinuteChangedEvent(object sender, NotifyChangedEventArgs e)
         => m_ChangeMinuteEvent?.Invoke(e);
     private void Tracker_SunriseEvent()
         => m_SunriseEvent?.Invoke();

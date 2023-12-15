@@ -6,7 +6,7 @@
 
     [System.Serializable]
     /*Yeniden düzenlenecek....*/
-    public class UIStatUpdater
+    public class UIStat
     {
         #region Variables
         public Stat Stat;

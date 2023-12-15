@@ -2,7 +2,7 @@
 {
     using System.Collections;
     using System.Collections.Generic;
-    using EndlessWinter.Manager;
+    using EndlessWinter.UI;
     using UnityEngine;
 
     public class StatManager : Singleton<StatManager>, IStatObserver
@@ -22,7 +22,7 @@
         }
         public void OnNotify(StatType type, float currentValue)
         {
-            UIStatUpdater uiStatUpdater = UIManager.Instance.UIStatUpdater(type);
+            UIStat uiStatUpdater = UIManager.Instance.UIStatUpdater(type);
             uiStatUpdater?.UpdateUI(currentValue);
 
             if (currentValue == 0 && this != null)
